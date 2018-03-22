@@ -1,0 +1,20 @@
+body {
+  background: #2e3438;
+  font-size: 80%;
+  padding: 18px;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+.ir8-holding-logo {
+  text-align: center;
+  margin-bottom: 150px;
+}
+.ir8-tagline {
+  color: #fff;
+}
