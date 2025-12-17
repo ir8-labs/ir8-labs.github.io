@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   IR8 BRUTALIST DESIGN SYSTEM
+   ============================================ */
+
+:root {
+  --ir8-black: #000000;
+  --ir8-white: #FFFFFF;
+  --ir8-gray: #333333;
+  --ir8-gray-dark: #1a1a1a;
+  --ir8-gray-mid: #666666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: var(--ir8-black);
+  color: var(--ir8-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Disable all rounded corners */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--ir8-white);
+  color: var(--ir8-black);
+}
+
+/* ============================================
+   NOISE OVERLAY - Heavy dystopian grain
+   ============================================ */
+.noise-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  animation: grain 0.5s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* Scanlines overlay */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.2) 2px,
+      rgba(0, 0, 0, 0.2) 4px);
+  opacity: 0.6;
+}
+
+/* Vignette effect - darkened edges */
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+
+/* Corruption scan line */
+.corruption-line {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 9996;
+  animation: corruption-scan 8s linear infinite;
+}
+
+@keyframes corruption-scan {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.font-display {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   HUD NAVIGATION
+   ============================================ */
+.hud-corner {
+  position: fixed;
+  z-index: 100;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 640px) {
+  .hud-corner {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hud-corner {
+    font-size: 1.25rem;
+  }
+}
+
+.hud-corner a {
+  color: var(--ir8-white);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.hud-corner a:hover {
+  color: var(--ir8-white);
+}
+
+.hud-top-left {
+  top: 2.5rem;
+  left: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .hud-top-left {
+    top: 3rem;
+    left: 3rem;
+  }
+}
+
+.hud-top-right {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.hud-bottom-left {
+  bottom: 1.5rem;
+  left: 1.5rem;
+}
+
+.hud-bottom-right {
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+
+/* ============================================
+   GLITCH EFFECT
+   ============================================ */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch {
+  animation: glitch 0.3s ease-in-out;
+}
